@@ -15,7 +15,7 @@ async function deleteChannel(vcService: VcService, oldState: VoiceState) {
   await channel?.send(format(i18n.handlers.voiceStateUpdate.autoVc.update.noMemberInVoiceChannel, oldState.channel, channel, oldState.channel))
 
   await vcService.updateIsDetele(vc, true)
-  await sleep(5000)
+  await sleep(30000)
 
   await checkExistVcChannel(vcService, oldState)
 }

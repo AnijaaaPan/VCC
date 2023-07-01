@@ -79,7 +79,7 @@ const en = {
         update: {
           connectVc: '<@{0}> has joined.',
           disconnectVc: '<@{0}> has left the building.',
-          noMemberInVoiceChannel: '>>> **The number of participants in {0} is now 0.\nNow if no one joins, {1} and {2} will be deleted automatically after 60 seconds.**',
+          noMemberInVoiceChannel: '>>> **The number of participants in {0} is now 0.\nNow if no one joins, {1} and {2} will be deleted automatically after 30 seconds.**',
         },
       },
     },
