@@ -14,12 +14,11 @@ class CreateCommand extends Command {
     const autoVcCreateI18n = i18n.commands.autoVc.create
 
     const vcAutoCreateService = new VcAutoCreateService(guildId)
-    const vcAutoCreates = await vcAutoCreateService.get()
-    if (vcAutoCreates.length === 3) {
-      throw new CustomError(autoVcCreateI18n.createLimitCount)
-    }
+    await this.guard(vcAutoCreateService)
 
     const func = async () => {
+      await this.guard(vcAutoCreateService)
+
       const category = await createCategory(this.general)
       const archive = await createArchiveChannel(this.general, category)
       const voice = await createVoiceChannel(this.general, category)
@@ -38,6 +37,16 @@ class CreateCommand extends Command {
       content: autoVcCreateI18n.contentYesNo,
     } as MessageCreateOptions
     await this.waitPushYesNoButton(messageCreateOptions, func)
+  }
+
+  private async guard(vcAutoCreateService: VcAutoCreateService) {
+    const { i18n } = this.general
+    const autoVcCreateI18n = i18n.commands.autoVc.create
+
+    const vcAutoCreates = await vcAutoCreateService.get()
+    if (vcAutoCreates.length === 3) {
+      throw new CustomError(autoVcCreateI18n.createLimitCount)
+    }
   }
 }
 
