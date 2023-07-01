@@ -5,7 +5,7 @@ export default async function createVoiceChannel(general: CustomInteraction, cat
   const { guild, i18n } = general
 
   const voiceChannel = await guild?.channels.create({
-    name: i18n.commands.autoVc.create.voiceChannel,
+    name: i18n.commands.autoVc.channel.voiceName,
     parent: category?.id,
     type: ChannelType.GuildVoice,
   })

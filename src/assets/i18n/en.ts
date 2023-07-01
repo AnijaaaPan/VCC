@@ -1,15 +1,27 @@
 const en = {
   commands: {
     autoVc: {
-      add: {
+      create: {
         contentYesNo: '**Do you want to create a VC auto-create category?**',
         createLimitCount: '>>> **※Only up to 3 VC auto-created categories can be created**',
         description: 'Create VC auto-create category',
       },
-      create: {
-        archiveChannel: 'archived VC',
-        category: 'Automatically created VC',
-        voiceChannel: 'VC Creation Room',
+      channel: {
+        archive: {
+          name: 'archived VC',
+          sendEmbed: {
+            description: ">>> **- Automatically create and archive VC's.**",
+            fields: [
+              {
+                name: 'log-condition:',
+                value: '>>> **If only {0} was said in the channel, it will not be archived**',
+              },
+            ],
+            title: 'About this channel',
+          },
+        },
+        categoryName: 'Automatically created VC',
+        voiceName: 'VC Creation Room',
       },
       delete: {
         description: 'Delete automatically created VC categories',

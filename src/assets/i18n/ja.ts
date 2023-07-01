@@ -1,15 +1,27 @@
 const ja = {
   commands: {
     autoVc: {
-      add: {
+      create: {
         contentYesNo: '**VC自動作成カテゴリーを作成しますか？**',
         createLimitCount: '>>> **※VC自動作成カテゴリーは最大3つまでしか作成できません**',
         description: 'VC自動作成カテゴリーを作成します',
       },
-      create: {
-        archiveChannel: 'アーカイブVC',
-        category: '自動作成VC',
-        voiceChannel: 'VC 作成部屋',
+      channel: {
+        archive: {
+          name: 'アーカイブVC',
+          sendEmbed: {
+            description: '>>> **- 自動作成VCのアーカイブを行います**',
+            fields: [
+              {
+                name: 'ログ条件:',
+                value: '>>> **チャンネル内の発言が{0}のみだった場合はアーカイブ化を行いません**',
+              },
+            ],
+            title: 'このチャンネルについて',
+          },
+        },
+        categoryName: '自動作成VC',
+        voiceName: 'VC 作成部屋',
       },
       delete: {
         description: 'VC自動作成カテゴリーを削除する',

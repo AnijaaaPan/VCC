@@ -1,5 +1,5 @@
 import { SubCommandPack } from '~/commands/base'
-import addAutoVc from './add'
+import addAutoVc from './create'
 import deleteAutoVc from './delete'
 import listAutoVc from './list'
 

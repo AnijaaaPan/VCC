@@ -8,15 +8,15 @@ import VcAutoCreateService from '~/services/VcAutoCreateService'
 import { VcAutoCreate } from '~/services/interface'
 import { langLocal } from '~/utils/discord'
 
-class AddCommand extends Command {
+class CreateCommand extends Command {
   protected async main(): Promise<void> {
     const { guildId, i18n } = this.general
-    const autoVcAddI18n = i18n.commands.autoVc.add
+    const autoVcCreateI18n = i18n.commands.autoVc.create
 
     const vcAutoCreateService = new VcAutoCreateService(guildId)
     const vcAutoCreates = await vcAutoCreateService.get()
     if (vcAutoCreates.length === 3) {
-      throw new CustomError(autoVcAddI18n.createLimitCount)
+      throw new CustomError(autoVcCreateI18n.createLimitCount)
     }
 
     const func = async () => {
@@ -35,7 +35,7 @@ class AddCommand extends Command {
     }
 
     const messageCreateOptions = {
-      content: autoVcAddI18n.contentYesNo,
+      content: autoVcCreateI18n.contentYesNo,
     } as MessageCreateOptions
     await this.waitPushYesNoButton(messageCreateOptions, func)
   }
@@ -43,14 +43,14 @@ class AddCommand extends Command {
 
 const addAutoVc: SubCommandPack = {
   data: {
-    description: langLocal().commands.autoVc.add.description,
+    description: langLocal().commands.autoVc.create.description,
     descriptionLocalizations: {
-      ja: langLocal(Locale.Japanese).commands.autoVc.add.description,
+      ja: langLocal(Locale.Japanese).commands.autoVc.create.description,
     },
-    name: 'add',
+    name: 'create',
     type: ApplicationCommandOptionType.Subcommand,
   },
-  instance: instance(AddCommand),
+  instance: instance(CreateCommand),
 }
 
 export default addAutoVc
