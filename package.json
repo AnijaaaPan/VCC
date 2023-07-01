@@ -1,0 +1,36 @@
+{
+  "name": "osiris",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "author": "yKicchan",
+  "license": "MIT",
+  "scripts": {
+    "test": "ts-node -r tsconfig-paths/register src/index.ts",
+    "start": "node build/index.js",
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "@types/cron": "^2.0.1",
+    "@types/node-cron": "^3.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.7.0",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.0.3",
+    "ioredis": "^5.3.1"
+  }
+}
