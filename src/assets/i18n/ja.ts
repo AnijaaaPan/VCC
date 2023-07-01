@@ -46,7 +46,7 @@ const ja = {
       success: '**{0} のチャンネル名を変更しました**',
     },
     guards: {
-      noPermission: '**※権限がありません**',
+      noPermission: '**※全権限がありません**',
     },
     options: {
       channelName: 'チャンネル名を指定',

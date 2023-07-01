@@ -17,4 +17,6 @@ export default async function clientReady() {
       guild.id
     )
   })
+
+  client.user?.setPresence({ activities: [{ name: '/auto-vc' }] })
 }

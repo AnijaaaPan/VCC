@@ -41,7 +41,7 @@ class CreateCommand extends Command {
   }
 }
 
-const addAutoVc: SubCommandPack = {
+const createAutoVc: SubCommandPack = {
   data: {
     description: langLocal().commands.autoVc.create.description,
     descriptionLocalizations: {
@@ -53,4 +53,4 @@ const addAutoVc: SubCommandPack = {
   instance: instance(CreateCommand),
 }
 
-export default addAutoVc
+export default createAutoVc

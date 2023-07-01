@@ -46,7 +46,7 @@ const en = {
       success: '**{0} channel names changed**',
     },
     guards: {
-      noPermission: '**※You do not have authorization.**',
+      noPermission: "**※You don't have full authorization.**",
     },
     options: {
       channelName: 'Specify channel name',
