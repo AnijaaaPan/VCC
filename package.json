@@ -1,8 +1,8 @@
 {
-  "name": "osiris",
+  "name": "vcc",
   "version": "1.0.0",
   "main": "build/index.js",
-  "author": "yKicchan",
+  "author": "AnijaaaPan",
   "license": "MIT",
   "scripts": {
     "test": "ts-node -r tsconfig-paths/register src/index.ts",
@@ -32,5 +32,9 @@
     "discord.js": "^14.11.0",
     "dotenv": "^16.0.3",
     "ioredis": "^5.3.1"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": ">=8.x"
   }
 }
