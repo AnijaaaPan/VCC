@@ -4,6 +4,7 @@ import clientReady from './handlers/clientReady'
 import interactionCreate from './handlers/interactionCreate'
 import { errorHandling } from './handlers/unhandledRejection'
 import voiceStateUpdate from './handlers/voiceStateUpdate'
+import guildCreate from './handlers/guildCreate'
 
 dotenv.config()
 
@@ -14,6 +15,7 @@ export const client = new Client({
 
 client.once(Events.ClientReady, clientReady)
 client.on(Events.InteractionCreate, interactionCreate)
+client.on(Events.GuildCreate, guildCreate)
 client.on(Events.VoiceStateUpdate, voiceStateUpdate)
 
 process.on('unhandledRejection', errorHandling)
