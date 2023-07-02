@@ -7,7 +7,7 @@ export default async function createArchiveChannel(general: CustomInteraction, c
   const { guild, i18n } = general
   const archiveI18n = i18n.commands.autoVc.channel.archive
 
-  const textChannel = await guild?.channels.create({
+  const textChannel = await guild?.channels.create<ChannelType.GuildText>({
     name: archiveI18n.name,
     parent: category?.id,
     type: ChannelType.GuildText,

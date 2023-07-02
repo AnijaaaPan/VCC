@@ -50,6 +50,7 @@ const ja = {
     },
     options: {
       channelName: 'チャンネル名を指定',
+      maxLimit: 'VCに参加できるMAX人数',
     },
     processing: '**※処理を実行中...**',
   },

@@ -47,6 +47,7 @@ async function createVoiceChannel(newState: VoiceState, vcAutoCreate: VcAutoCrea
         name: `${newState.member?.displayName}`,
         type: ChannelType.GuildVoice,
         parent: vcAutoCreate.categoryId,
+        userLimit: vcAutoCreate.maxLimit ?? undefined,
       })
       .then(async (vcChannel) => {
         await member?.voice.setChannel(vcChannel)

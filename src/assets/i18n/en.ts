@@ -50,6 +50,7 @@ const en = {
     },
     options: {
       channelName: 'Specify channel name',
+      maxLimit: 'Max number of people who can join VC',
     },
     processing: '**※Processing in progress...**',
   },

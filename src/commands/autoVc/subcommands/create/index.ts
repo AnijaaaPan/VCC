@@ -1,5 +1,6 @@
 import { ApplicationCommandOptionType, Locale, MessageCreateOptions } from 'discord.js'
 import { Command, SubCommandPack, instance } from '~/commands/base'
+import { maxLimitOption } from '~/commands/shards/options'
 import createArchiveChannel from '~/features/vcAutoCreate/createArchiveChannel'
 import createCategory from '~/features/vcAutoCreate/createCategory'
 import createVoiceChannel from '~/features/vcAutoCreate/createVoiceChannel'
@@ -12,6 +13,7 @@ class CreateCommand extends Command {
   protected async main(): Promise<void> {
     const { guildId, i18n } = this.general
     const autoVcCreateI18n = i18n.commands.autoVc.create
+    const maxLimit = this.options.getNumber(maxLimitOption.name)
 
     const vcAutoCreateService = new VcAutoCreateService(guildId)
     await this.guard(vcAutoCreateService)
@@ -26,6 +28,7 @@ class CreateCommand extends Command {
       const newVcAutoCreate: VcAutoCreate = {
         archiveId: archive?.id ?? '',
         categoryId: category?.id ?? '',
+        maxLimit,
         voiceId: voice?.id ?? '',
       }
       const vcAutoCreates = await vcAutoCreateService.get()

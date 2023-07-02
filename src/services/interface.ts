@@ -1,6 +1,7 @@
 export interface VcAutoCreate {
   archiveId: string
   categoryId: string
+  maxLimit: number | null
   voiceId: string
 }
 
