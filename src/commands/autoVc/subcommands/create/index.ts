@@ -60,6 +60,7 @@ const createAutoVc: SubCommandPack = {
       ja: langLocal(Locale.Japanese).commands.autoVc.create.description,
     },
     name: 'create',
+    options: [maxLimitOption],
     type: ApplicationCommandOptionType.Subcommand,
   },
   instance: instance(CreateCommand),
