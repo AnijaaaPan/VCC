@@ -3,7 +3,7 @@ import { I18n } from '~/assets/i18n'
 import { CustomError } from '~/handlers/unhandledRejection'
 import VcService from '~/services/VcService'
 import { Vc, VcAutoCreate } from '~/services/interface'
-import { getChannel, lang } from '~/utils/discord'
+import { getChannel, getRole, lang } from '~/utils/discord'
 import { format } from '~/utils/general'
 
 export default async function autoCreate(vcService: VcService, newState: VoiceState, vcAutoCreate: VcAutoCreate) {
@@ -23,6 +23,7 @@ export default async function autoCreate(vcService: VcService, newState: VoiceSt
 
   try {
     vcChannel = await createVoiceChannel(newState, vcAutoCreate, i18n)
+    await addRole(vcAutoCreate, member)
 
     const vcs = await vcService.get()
     const newVc: Vc = {
@@ -77,4 +78,11 @@ async function sendAutoCreateMessage(vcChannel: VoiceChannel, member: GuildMembe
     }
   )
   await vcChannel.send({ content: `${member}`, embeds: [embed] })
+}
+
+async function addRole(vcAutoCreate: VcAutoCreate, member: GuildMember | null) {
+  const role = await getRole(vcAutoCreate.roleId, member?.guild)
+  if (!role) return
+
+  await member?.roles.add(role).catch(() => {})
 }

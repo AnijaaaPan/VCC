@@ -1,4 +1,4 @@
-import { Guild, GuildBasedChannel, Locale, TextChannel } from 'discord.js'
+import { Guild, GuildBasedChannel, Locale, Role, TextChannel } from 'discord.js'
 import { I18n } from '~/assets/i18n'
 import en from '~/assets/i18n/en'
 import ja from '~/assets/i18n/ja'
@@ -31,6 +31,16 @@ export async function getChannel<T extends GuildBasedChannel>(channelId?: string
     return getChannel ? (getChannel as T) : undefined
   }
 
-  const fetchchannel = await manager?.channels.fetch(channelId ?? '')
+  const fetchchannel = await manager?.channels.fetch(channelId ?? '').catch(() => {})
   return fetchchannel ? (fetchchannel as T) : undefined
+}
+
+export async function getRole<T extends Role>(roleId?: string | null, guild?: Guild | null) {
+  const getRole = guild?.roles.cache.get(roleId ?? '')
+  if (getRole) {
+    return getRole ? (getRole as T) : undefined
+  }
+
+  const fetchRole = await guild?.roles.fetch(roleId ?? '').catch(() => {})
+  return fetchRole ? (fetchRole as T) : undefined
 }

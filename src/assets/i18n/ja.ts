@@ -1,11 +1,6 @@
 const ja = {
   commands: {
     autoVc: {
-      create: {
-        contentYesNo: '**VC自動作成カテゴリーを作成しますか？**',
-        createLimitCount: '>>> **※VC自動作成カテゴリーは最大3つまでしか作成できません**',
-        description: 'VC自動作成カテゴリーを作成します',
-      },
       channel: {
         archive: {
           name: 'アーカイブVC',
@@ -23,14 +18,47 @@ const ja = {
         categoryName: '自動作成VC',
         voiceName: 'VC 作成部屋',
       },
+      create: {
+        completed: '>>> **※自動作成VCの作成が完了しました**',
+        contentYesNo: '**VC自動作成カテゴリーを作成しますか？**',
+        createLimitCount: '>>> **※VC自動作成カテゴリーは最大3つまでしか作成できません**',
+        description: 'VC自動作成カテゴリーを作成します',
+      },
       delete: {
+        completed: '>>> **※削除が完了しました**',
         description: 'VC自動作成カテゴリーを削除する',
+      },
+      role: {
+        name: 'VC参加中',
       },
       description: 'VC自動作成カテゴリーを操作します',
       list: {
         description: 'VC自動作成カテゴリー一覧を表示します',
       },
       undefined: '>>> **※VC自動作成カテゴリーのデータがありませんでした**',
+      vcAutoCreateEmbed: {
+        fields: [
+          {
+            name: 'カテゴリー:',
+            value: '{0}',
+          },
+          {
+            name: 'アーカイブチャンネル:',
+            value: '{0}',
+          },
+          {
+            name: 'VC自動作成チャンネル:',
+            value: '{0}',
+          },
+          {
+            name: '通知役職:',
+            value: '{0}',
+          },
+        ],
+        title: 'VC自動作成一覧:',
+        undefinedChannel: '>>> **※チャンネルが確認できませんでした**',
+        undefinedRole: '>>> **※役職が確認できませんでした**',
+      },
     },
     buttonYesNo: {
       cancel: '**コマンドをキャンセルしました**',

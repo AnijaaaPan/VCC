@@ -1,11 +1,6 @@
 const en = {
   commands: {
     autoVc: {
-      create: {
-        contentYesNo: '**Do you want to create a VC auto-create category?**',
-        createLimitCount: '>>> **※Only up to 3 VC auto-created categories can be created**',
-        description: 'Create VC auto-create category',
-      },
       channel: {
         archive: {
           name: 'archived VC',
@@ -23,14 +18,47 @@ const en = {
         categoryName: 'Automatically created VC',
         voiceName: 'VC Creation Room',
       },
+      create: {
+        completed: '>>> **※Auto-created VC has been created**',
+        contentYesNo: '**Do you want to create a VC auto-create category?**',
+        createLimitCount: '>>> **※Only up to 3 VC auto-created categories can be created**',
+        description: 'Create VC auto-create category',
+      },
       delete: {
+        completed: '>>> **※Deletion completed.**',
         description: 'Delete automatically created VC categories',
+      },
+      role: {
+        name: 'VC Participating',
       },
       description: 'Delete automatically created VC categories',
       list: {
         description: 'Displays a list of automatically created VC categories',
       },
       undefined: '>>> **※VCNo data was available for the VC auto-creation category**',
+      vcAutoCreateEmbed: {
+        fields: [
+          {
+            name: 'Category:',
+            value: '{0}',
+          },
+          {
+            name: 'Archived Channel:',
+            value: '{0}',
+          },
+          {
+            name: 'VC auto-created channel:',
+            value: '{0}',
+          },
+          {
+            name: 'Notification Role:',
+            value: '{0}',
+          },
+        ],
+        title: 'VC Automated Creation List:',
+        undefinedChannel: '>>> **※Channel could not be identified.**',
+        undefinedRole: '>>> **※Role could not be identified.**',
+      },
     },
     buttonYesNo: {
       cancel: '**Command canceled.**',

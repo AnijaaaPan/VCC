@@ -21,7 +21,7 @@ export default class VcAutoCreateService extends Service {
     await this.save(newVcs as VcAutoCreate[])
   }
 
-  async getFromSomeId(id: string) {
+  async getFromSomeId(id: string = '') {
     const vcs = await this.get()
     return vcs.find((vc) => [vc.archiveId, vc.categoryId, vc.voiceId].includes(id))
   }
