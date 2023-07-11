@@ -1,6 +1,7 @@
-import { ChannelType, EmbedBuilder, GuildMember, VoiceChannel, VoiceState } from 'discord.js'
+import { CategoryChannel, ChannelType, EmbedBuilder, GuildMember, VoiceChannel, VoiceState } from 'discord.js'
 import { I18n } from '~/assets/i18n'
 import { CustomError } from '~/handlers/unhandledRejection'
+import VcAutoCreateService from '~/services/VcAutoCreateService'
 import VcService from '~/services/VcService'
 import { Vc, VcAutoCreate } from '~/services/interface'
 import { getChannel, getRole, lang } from '~/utils/discord'
@@ -40,14 +41,15 @@ export default async function autoCreate(vcService: VcService, newState: VoiceSt
 }
 
 async function createVoiceChannel(newState: VoiceState, vcAutoCreate: VcAutoCreate, i18n: I18n): Promise<VoiceChannel> {
-  return await new Promise((resolve) => {
-    const member = newState.member
+  const member = newState.member
+  const categoryId = await getCategoryId(newState, vcAutoCreate, i18n)
 
+  return await new Promise((resolve) => {
     newState.guild.channels
       .create<ChannelType.GuildVoice>({
         name: `${newState.member?.displayName}`,
         type: ChannelType.GuildVoice,
-        parent: vcAutoCreate.categoryId,
+        parent: categoryId,
         userLimit: vcAutoCreate.maxLimit ?? undefined,
       })
       .then(async (vcChannel) => {
@@ -59,6 +61,33 @@ async function createVoiceChannel(newState: VoiceState, vcAutoCreate: VcAutoCrea
         throw new CustomError(i18n.handlers.voiceStateUpdate.autoVc.create.errorVoiceChannel)
       })
   })
+}
+
+async function getCategoryId(newState: VoiceState, vcAutoCreate: VcAutoCreate, i18n: I18n) {
+  const categoryIds = vcAutoCreate.extraCategoryIds ? [vcAutoCreate.categoryId, ...vcAutoCreate.extraCategoryIds] : [vcAutoCreate.categoryId]
+  const guild = newState.member?.guild
+  const guildId = guild?.id ?? ''
+
+  for (let i = 0; i < categoryIds.length; i++) {
+    const categoryId = categoryIds[i]
+    const category = await getChannel<CategoryChannel>(categoryId, guild)
+    if (!category) continue
+
+    const childCount = category.children.cache.size ?? 0
+    if (childCount < 50) return categoryId
+  }
+
+  const category = await getChannel<CategoryChannel>(vcAutoCreate.categoryId, guild)
+  if (!category) return
+  const cloneCategory = await category?.clone({
+    name: i18n.commands.autoVc.channel.extraCategoryName
+  })
+  await cloneCategory.setPosition(category.position + 1)
+  const categoryId = cloneCategory.id ?? ''
+
+  const vcAutoCreateService = new VcAutoCreateService(guildId)
+  await vcAutoCreateService.updateExtraCategoryId(vcAutoCreate, categoryId, true)
+  return categoryId
 }
 
 async function sendAutoCreateMessage(vcChannel: VoiceChannel, member: GuildMember | null, i18n: I18n) {
@@ -84,5 +113,5 @@ async function addRole(vcAutoCreate: VcAutoCreate, member: GuildMember | null) {
   const role = await getRole(vcAutoCreate.roleId, member?.guild)
   if (!role) return
 
-  await member?.roles.add(role).catch(() => {})
+  await member?.roles.add(role).catch(() => { })
 }
