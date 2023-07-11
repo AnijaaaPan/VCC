@@ -90,5 +90,5 @@ async function deleteVcAutoCreate(general: CustomInteraction, selectPageIndex: n
   if (category) await category.delete()
   if (role) await role.delete()
 
-  await vcAutoCreateService.updateIsDetele(vcAutoCreate, true)
+  await vcAutoCreateService.updateIsDetele(vcAutoCreate)
 }

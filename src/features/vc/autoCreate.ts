@@ -71,23 +71,22 @@ async function getCategoryId(newState: VoiceState, vcAutoCreate: VcAutoCreate, i
   for (let i = 0; i < categoryIds.length; i++) {
     const categoryId = categoryIds[i]
     const category = await getChannel<CategoryChannel>(categoryId, guild)
-    const childCount = category?.children.cache.size ?? 0
+    if (!category) continue
+
+    const childCount = category.children.cache.size ?? 0
     if (childCount < 50) return categoryId
   }
 
-  const lastCategoryId = categoryIds.reverse()[0]
-  const lastCategory = await getChannel<CategoryChannel>(lastCategoryId, guild)
-  const lastCategoryPosition = lastCategory?.position ?? 0
-
-  const category = await guild?.channels.create<ChannelType.GuildCategory>({
-    name: i18n.commands.autoVc.channel.extraCategoryName,
-    position: lastCategoryPosition + 2,
-    type: ChannelType.GuildCategory,
+  const category = await getChannel<CategoryChannel>(vcAutoCreate.categoryId, guild)
+  if (!category) return
+  const cloneCategory = await category?.clone({
+    name: i18n.commands.autoVc.channel.extraCategoryName
   })
-  const categoryId = category?.id ?? ''
+  await cloneCategory.setPosition(category.position + 1)
+  const categoryId = cloneCategory.id ?? ''
 
   const vcAutoCreateService = new VcAutoCreateService(guildId)
-  await vcAutoCreateService.updateIsDetele
+  await vcAutoCreateService.updateExtraCategoryId(vcAutoCreate, categoryId, true)
   return categoryId
 }
 
@@ -114,5 +113,5 @@ async function addRole(vcAutoCreate: VcAutoCreate, member: GuildMember | null) {
   const role = await getRole(vcAutoCreate.roleId, member?.guild)
   if (!role) return
 
-  await member?.roles.add(role).catch(() => {})
+  await member?.roles.add(role).catch(() => { })
 }

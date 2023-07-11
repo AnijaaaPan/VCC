@@ -21,12 +21,19 @@ export default class VcAutoCreateService extends Service {
     await this.save(newVcs as VcAutoCreate[])
   }
 
-  async updateAddExtraCategoryId(getVcAutoCreate: VcAutoCreate, categoryId: string) {
+  async updateExtraCategoryId(getVcAutoCreate: VcAutoCreate, categoryId: string, isAdd: boolean) {
     const vcAutoCreates = await this.get()
     const newVcs = vcAutoCreates
       .map((vc) => {
         if (vc.categoryId !== getVcAutoCreate.categoryId) return vc
-        return undefined
+
+        if (isAdd) {
+          vc.extraCategoryIds.push(categoryId)
+        } else {
+          const filterExtraCategoryIds = vc.extraCategoryIds.filter(cId => cId !== categoryId)
+          vc = { ...vc, extraCategoryIds: filterExtraCategoryIds }
+        }
+        return vc
       })
       .filter((d) => d)
     await this.save(newVcs as VcAutoCreate[])
@@ -42,8 +49,8 @@ export default class VcAutoCreateService extends Service {
     return vcAutoCreates.find((vc) => vc.voiceId === channelId)
   }
 
-  async getVcAutoCreateByCategory(channelId?: string) {
+  async getVcAutoCreateByCategory(categoryId: string = '') {
     const vcAutoCreates = await this.get()
-    return vcAutoCreates.find((vc) => vc.categoryId === channelId)
+    return vcAutoCreates.find((vc) => vc.categoryId === categoryId || vc.extraCategoryIds.includes(categoryId))
   }
 }
