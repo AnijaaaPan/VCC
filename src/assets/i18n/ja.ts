@@ -16,6 +16,7 @@ const ja = {
           },
         },
         categoryName: '自動作成VC',
+        extraCategoryName: '自動作成VC ※一時的',
         voiceName: 'VC 作成部屋',
       },
       create: {

@@ -10,7 +10,18 @@ export default class VcAutoCreateService extends Service {
     await this.saveData(vcAutoCreates, 'vcAutoCreates')
   }
 
-  async updateIsDetele(getVcAutoCreate: VcAutoCreate, isDelete: boolean) {
+  async updateIsDetele(getVcAutoCreate: VcAutoCreate) {
+    const vcAutoCreates = await this.get()
+    const newVcs = vcAutoCreates
+      .map((vc) => {
+        if (vc.categoryId !== getVcAutoCreate.categoryId) return vc
+        return undefined
+      })
+      .filter((d) => d)
+    await this.save(newVcs as VcAutoCreate[])
+  }
+
+  async updateAddExtraCategoryId(getVcAutoCreate: VcAutoCreate, categoryId: string) {
     const vcAutoCreates = await this.get()
     const newVcs = vcAutoCreates
       .map((vc) => {

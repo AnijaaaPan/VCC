@@ -16,6 +16,7 @@ const en = {
           },
         },
         categoryName: 'Automatically created VC',
+        extraCategoryName: 'Automatically created VC ※temporary',
         voiceName: 'VC Creation Room',
       },
       create: {

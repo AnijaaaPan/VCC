@@ -31,6 +31,7 @@ class CreateCommand extends Command {
       const newVcAutoCreate: VcAutoCreate = {
         archiveId: archive?.id ?? '',
         categoryId: category?.id ?? '',
+        extraCategoryIds: [],
         maxLimit,
         roleId: vcJoinRole?.id ?? '',
         voiceId: voice?.id ?? '',
