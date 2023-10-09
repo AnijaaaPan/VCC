@@ -1,13 +1,17 @@
 import { Service } from '.'
 import { Vc } from './interface'
 
-export default class VcService extends Service {
+export default class VcService extends Service<Vc> {
+  constructor(protected guildId: string) {
+    super(guildId, 'vcs')
+  }
+
   async get(): Promise<Vc[]> {
-    return (await this.getData('vcs')) ?? []
+    return (await this.getData()) ?? []
   }
 
   async save(vcs: Vc[]) {
-    await this.saveData(vcs, 'vcs')
+    await this.saveData(vcs)
   }
 
   async updateIsDetele(getVc: Vc, isDelete: boolean) {

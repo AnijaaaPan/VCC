@@ -6,7 +6,7 @@ export default async function createCategory(general: CustomInteraction) {
 
   const category = await guild?.channels.create<ChannelType.GuildCategory>({
     name: i18n.commands.autoVc.channel.categoryName,
-    type: ChannelType.GuildCategory,
+    type: ChannelType.GuildCategory
   })
   return category
 }

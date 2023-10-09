@@ -10,6 +10,5 @@ export default async function createVoiceChannel(general: CustomInteraction, cat
     type: ChannelType.GuildVoice,
     userLimit: 1,
   })
-
   return voiceChannel
 }

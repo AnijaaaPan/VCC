@@ -37,6 +37,7 @@ async function archiveVc(vcChannel: VoiceChannel) {
 
   const category = await getChannel<CategoryChannel>(categoryId, guild)
   if (category?.children.cache.size !== 0) return
+
   await category.delete()
   await vcAutoCreateService.updateExtraCategoryId(vcAutoCreate, categoryId, false)
 }

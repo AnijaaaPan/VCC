@@ -1,40 +1,43 @@
 {
-  "name": "vcc",
-  "version": "1.0.0",
-  "main": "build/index.js",
   "author": "AnijaaaPan",
-  "license": "MIT",
-  "scripts": {
-    "test": "ts-node -r tsconfig-paths/register src/index.ts",
-    "start": "node build/index.js",
-    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
-    "dev": "nodemon"
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "ioredis": "^5.3.2"
   },
   "devDependencies": {
     "@types/cron": "^2.0.1",
-    "@types/node-cron": "^3.0.7",
-    "@typescript-eslint/eslint-plugin": "^5.33.0",
-    "@typescript-eslint/parser": "^5.33.0",
-    "eslint": "^8.0.1",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "nodemon": "^2.0.19",
-    "prettier": "^2.7.1",
+    "@types/node-cron": "^3.0.9",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "aicommits": "^1.11.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.1",
+    "npm-check-updates": "^16.14.5",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
-    "tsc-alias": "^1.7.0",
-    "tsconfig-paths": "^4.1.2",
-    "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "discord.js": "^14.11.0",
-    "dotenv": "^16.0.3",
-    "ioredis": "^5.3.1"
+    "tsc-alias": "^1.8.8",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2"
   },
   "engines": {
     "node": "18.x",
     "npm": ">=8.x"
-  }
+  },
+  "license": "MIT",
+  "main": "build/index.js",
+  "name": "vcc",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "dev": "nodemon",
+    "start": "node build/index.js",
+    "test": "ts-node -r tsconfig-paths/register src/index.ts",
+    "update-package": "ncu -u && npm install"
+  },
+  "version": "1.0.0"
 }
