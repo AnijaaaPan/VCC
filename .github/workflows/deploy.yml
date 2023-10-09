@@ -26,11 +26,11 @@ jobs:
           echo "$PRIVATE_KEY" > private_key
           chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key $USERNAME@$HOST << 'EOF'
-            cd /home/opc/Bot-Tao-Support
+            cd /home/ubuntu/bot
             git pull
             npm run update-package
             npm ci
             npm run build
-            sudo systemctl restart tao-support-bot
+            sudo systemctl restart bot
           EOF
           rm -f private_key
