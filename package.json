@@ -1,15 +1,9 @@
 {
-  "name": "vcc",
-  "version": "1.0.0",
-  "main": "build/index.js",
   "author": "AnijaaaPan",
-  "license": "MIT",
-  "scripts": {
-    "test": "ts-node -r tsconfig-paths/register src/index.ts",
-    "start": "node build/index.js",
-    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
-    "dev": "nodemon",
-    "update-package": "ncu -u && npm install"
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "ioredis": "^5.3.2"
   },
   "devDependencies": {
     "@types/cron": "^2.0.1",
@@ -31,13 +25,19 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
   },
-  "dependencies": {
-    "discord.js": "^14.13.0",
-    "dotenv": "^16.3.1",
-    "ioredis": "^5.3.2"
-  },
   "engines": {
     "node": "18.x",
     "npm": ">=8.x"
-  }
+  },
+  "license": "MIT",
+  "main": "build/index.js",
+  "name": "vcc",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "dev": "nodemon",
+    "start": "node build/index.js",
+    "test": "ts-node -r tsconfig-paths/register src/index.ts",
+    "update-package": "ncu -u && npm install"
+  },
+  "version": "1.0.0"
 }
