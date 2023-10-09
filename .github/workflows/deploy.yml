@@ -1,17 +1,36 @@
-name: Deploy
+name: Restart Tao Support Bot
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    types:
+      - closed
 
 jobs:
-  build:
+  deploy:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v3
-      - uses: akhileshns/heroku-deploy@v3.12.13
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'discord-vcc'
-          heroku_email: 'taqooto@gmail.com'
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: SSH and Deploy
+        env:
+          PRIVATE_KEY: ${{ secrets.ORACLE_CLOUD_PRIVATE_KEY }}
+          HOST: ${{ secrets.ORACLE_CLOUD_HOST }}
+          USERNAME: ${{ secrets.ORACLE_CLOUD_USERNAME }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key $USERNAME@$HOST << 'EOF'
+            cd /home/opc/Bot-Tao-Support
+            git pull
+            npm run update-package
+            npm ci
+            npm run build
+            sudo systemctl restart tao-support-bot
+          EOF
+          rm -f private_key
