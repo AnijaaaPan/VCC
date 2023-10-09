@@ -35,6 +35,7 @@ export default async function autoCreate(vcService: VcService, newState: VoiceSt
     }
     const newVcs = [...vcs, newVc]
     await vcService.save(newVcs)
+
   } catch (e) {
     if (vcChannel) vcChannel.delete()
   }
@@ -79,6 +80,7 @@ async function getCategoryId(newState: VoiceState, vcAutoCreate: VcAutoCreate, i
 
   const category = await getChannel<CategoryChannel>(vcAutoCreate.categoryId, guild)
   if (!category) return
+
   const cloneCategory = await category?.clone({
     name: i18n.commands.autoVc.channel.extraCategoryName
   })

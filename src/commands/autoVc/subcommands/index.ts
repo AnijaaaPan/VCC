@@ -3,4 +3,10 @@ import createAutoVc from './create'
 import deleteAutoVc from './delete'
 import listAutoVc from './list'
 
-export default [createAutoVc, deleteAutoVc, listAutoVc] as SubCommandPack[]
+const commands: SubCommandPack[] = [
+  createAutoVc,
+  deleteAutoVc,
+  listAutoVc
+]
+
+export default commands

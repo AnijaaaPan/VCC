@@ -31,14 +31,16 @@ export default async function paging(general: CustomInteraction, isDelete: boole
   collector?.on('collect', async (i) => {
     if (i.customId === CUSTOM_ID.BACK) {
       selectPageIndex--
+
     } else if (i.customId === CUSTOM_ID.NEXT) {
       selectPageIndex++
+
     } else if (i.customId === CUSTOM_ID.DELETE) {
       await deleteVcAutoCreate(general, selectPageIndex)
       await i.update({
-        content: i18n.commands.autoVc.delete.completed,
-        embeds: [],
         components: [],
+        content: i18n.commands.autoVc.delete.completed,
+        embeds: []
       })
       return
     }
@@ -47,15 +49,15 @@ export default async function paging(general: CustomInteraction, isDelete: boole
     buttons[1].setDisabled(selectPageIndex === vcAutoCreates.length - 1)
 
     await i.update({
-      embeds: [embeds[selectPageIndex]],
       components: [new ActionRowBuilder<ButtonBuilder>().addComponents(...buttons)],
+      embeds: [embeds[selectPageIndex]]
     })
   })
 
   collector?.on('end', async () => {
     await interaction.editReply({
-      embeds: [embeds[selectPageIndex]],
       components: [],
+      embeds: [embeds[selectPageIndex]]
     })
   })
 }

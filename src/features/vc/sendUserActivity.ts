@@ -23,6 +23,7 @@ export async function sendUserActivity(vcService: VcService, oldState: VoiceStat
   const vcAutoCreateService = new VcAutoCreateService(state.guild.id)
   const vcAutoCreate = await vcAutoCreateService.getFromSomeId(state.channel?.parent?.id ?? '')
   if (!vcAutoCreate) return
+
   await updateRole(vcAutoCreate, member, isConnected)
 }
 
@@ -31,8 +32,9 @@ async function updateRole(vcAutoCreate: VcAutoCreate, member: GuildMember | null
   if (!role) return
 
   if (isConnected) {
-    await member?.roles.add(role).catch(() => {})
-  } else {
-    await member?.roles.remove(role).catch(() => {})
+    await member?.roles.add(role).catch(() => { })
+    return
   }
+
+  await member?.roles.remove(role).catch(() => { })
 }

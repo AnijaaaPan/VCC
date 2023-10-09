@@ -30,10 +30,10 @@ export class Logger {
     embed.setTimestamp()
     embed.setColor(color)
     await this.webhook?.send({
+      avatarURL: this.avatarURL,
       content: isProd && isMention ? `<@&${config.discord.errorMentionRoleId}>` : undefined,
       embeds: [embed],
-      username: this.username,
-      avatarURL: this.avatarURL,
+      username: this.username
     })
   }
 

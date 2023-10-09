@@ -18,12 +18,12 @@ export default async function createArchiveChannel(general: CustomInteraction, c
     .setDescription(archiveI18n.sendEmbed.description)
     .addFields({
       name: archiveI18n.sendEmbed.fields[0].name,
-      value: format(archiveI18n.sendEmbed.fields[0].value, client.user),
+      value: format(archiveI18n.sendEmbed.fields[0].value, client.user)
     })
 
   await textChannel?.createWebhook({ name: 'Log Webhook' })
   await textChannel?.send({
-    embeds: [embed],
+    embeds: [embed]
   })
   return textChannel
 }
