@@ -1,12 +1,11 @@
 import Redis from 'ioredis'
-import config from '~/config'
 import { logger } from './logger'
 
 export let redis: Redis
 export const KEY_SEPARATOR = ':'
 
 export function redisConnect() {
-  redis = new Redis(process.env.REDIS_URL ?? '', config.redisOptions)
+  redis = new Redis(process.env.REDIS_URL ?? '')
   logger.info('**Redisに接続完了**')
 }
 
